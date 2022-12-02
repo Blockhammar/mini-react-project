@@ -6,6 +6,7 @@ function Allt(props) {
   const userName = props.username;
   const [points, setPoints] = useState(0);
 
+
   function Cards(props) {
     const [isFlipped, setIsFlipped] = useState(false);
 
@@ -24,6 +25,11 @@ function Allt(props) {
       </div>;
     }
   }
+
+  function SlumpaKort(){
+    
+  }
+
 }
 
 function App() {
