@@ -1,43 +1,61 @@
-import logo from "./logo.svg";
 import "./App.css";
-import React, { useState, useEffect } from "react";
-
-function Allt(props) {
-  const userName = props.username;
-  const [points, setPoints] = useState(0);
+import React, { useState } from "react";
 
 
-  function Cards(props) {
-    const [isFlipped, setIsFlipped] = useState(false);
+function Card(props) {
+  const [isFlipped, setIsFlipped] = useState(false);
 
-    function handleClick() {
-      setIsFlipped(!isFlipped);
-    }
-
-    if (isFlipped) {
-      return (
-        <div key="front" onClick={handleClick} style={{ backgroundColor: "blue", width: "150px", height: "150px" }}>
-          <img src={props.img} alt={props.name} />
-        </div>
-      );
-    } else {
-      <div key="back" onClick={handleClick} style={{ backgroundColor: "red", width: "150px", height: "150px" }}>
-      </div>;
-    }
+  function handleClick() {
+    setIsFlipped(!isFlipped);
   }
 
-  function SlumpaKort(){
+  if (isFlipped) {
+    return (
+      <div
+        key="front"
+        onClick={handleClick}
+        style={{ backgroundColor: "blue", width: "150px", height: "150px" }}
+      >
+        <p>{props.name}</p>
+      </div>
+    );
+  } 
+  else 
+  {
+   return ( <div
+      key="back"
+      onClick={handleClick}
+      style={{ backgroundColor: "red", width: "150px", height: "150px" }}
+    ></div>)
+  }
+}
+
+
+function Allt(props) {
+  const [data, setData] = useState([]);
+  const [cards, setCard] = useState([]);
+
+  function SlumpaKort() {
+    fetch(`https://www.swapi.tech/api/people`)
+      .then((response) => response.json())
+      .then((data) => setData(data.results));
+
+    for (let index = 0; index < 5; index++) {
+       setCard[index] (<Card/>)
+    }
+
     
   }
 
+  return (
+    <div>
+      {cards[0]}
+    </div>
+  );
 }
 
 function App() {
-  return (
-    <div className="App">
-      <Allt />
-    </div>
-  );
+  return <Allt/>
 }
 
 export default App;
