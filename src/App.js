@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 
 function Card(props) {
@@ -33,23 +33,18 @@ function Card(props) {
 
 function Allt(props) {
   const [data, setData] = useState([]);
-  const [cards, setCard] = useState([]);
+  
 
-  function SlumpaKort() {
+  useEffect(() => {
     fetch(`https://www.swapi.tech/api/people`)
-      .then((response) => response.json())
-      .then((data) => setData(data.results));
-
-    for (let index = 0; index < 5; index++) {
-       setCard[index] (<Card/>)
-    }
-
-    
-  }
+    .then((response) => response.json())
+    .then((data) => setData(data.results));
+  }, []);
+  
 
   return (
     <div>
-      {cards[0]}
+      {data.map(x => <Card/>)}
     </div>
   );
 }
