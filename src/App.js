@@ -16,7 +16,7 @@ function Card(props) {
         onClick={handleClick}
         style={{ backgroundColor: "blue", width: "150px", height: "150px" }}
       >
-        <p>{props.name}</p>
+        <p>{props.xnamn}</p>
       </div>
     );
   } 
@@ -36,7 +36,7 @@ function Allt(props) {
   
 
   useEffect(() => {
-    fetch(`https://www.swapi.tech/api/people`)
+    fetch(`https://www.swapi.tech/api/planets`)
     .then((response) => response.json())
     .then((data) => setData(data.results));
   }, []);
@@ -44,7 +44,8 @@ function Allt(props) {
 
   return (
     <div>
-      {data.map(x => <Card/>)}
+      {data.map(x => <Card xnamn={x.name}/>)}
+      {data.map(x => <Card xnamn={x.name}/>)}
     </div>
   );
 }
